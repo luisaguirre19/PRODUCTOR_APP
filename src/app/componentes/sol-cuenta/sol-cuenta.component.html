@@ -1,1 +1,88 @@
-<p>sol-cuenta works!</p>
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="form-wrapper">
+                <form>
+                    <div>
+                        <mat-form-field>
+                            <input matInput placeholder="Etiqueta" [(ngModel)]="etiqueta" name="name">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Peso en libras:" [(ngModel)]="peso" name="peso">
+                       </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Cantidad de parcialidades:" [(ngModel)]="parcialidad" name="parcialidad">
+                       </mat-form-field>
+                    </div>
+                    <button mat-raised-button (click)="submit()">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+<mat-form-field>
+    <input matInput placeholder="Etiqueta" [(ngModel)]="etiqueta" name="name">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput type="number" placeholder="Peso en libras:" [(ngModel)]="peso" name="peso">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput type="number" placeholder="Cantidad de parcialidades:" [(ngModel)]="parcialidad" name="parcialidad">
+</mat-form-field>
+
+<button mat-raised-button (click)="submit()">Enviar</button>
+
+<mat-table [dataSource]="tableData">
+
+    <!-- Columna de ID -->
+    <ng-container matColumnDef="id_cuenta">
+      <mat-header-cell *matHeaderCellDef> Id Cuenta </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id_cuenta}} </mat-cell>
+    </ng-container>
+
+        <!-- Columna de Nombre -->
+    <ng-container matColumnDef="Etiqueta">
+        <mat-header-cell *matHeaderCellDef> Etiqueta </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.etiqueta}} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Nombre -->
+    <ng-container matColumnDef="Peso">
+      <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.peso}} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Correo Electrónico -->
+    <ng-container matColumnDef="Parcialidades">
+      <mat-header-cell *matHeaderCellDef> Parcialidades </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.parcialidades}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Acciones -->
+    <!-- <ng-container matColumnDef="Estado">
+      <mat-header-cell *matHeaderCellDef> estado </mat-header-cell>
+      <mat-cell *matCellDef="let element"> -->
+        <!-- <button mat-icon-button color="success" (click)="a(element.id_login)">
+          <mat-icon>done</mat-icon>
+        </button> -->
+        <!-- <button mat-icon-button color="warn" (click)="eliminar_vehiculo(element.id_transporte)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container> -->
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>

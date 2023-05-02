@@ -1,0 +1,43 @@
+<mat-table [dataSource]="envios">
+
+    <!-- Columna de ID -->
+    <ng-container matColumnDef="id_envio">
+      <mat-header-cell *matHeaderCellDef> id_envio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id_envio}} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Nombre -->
+    <ng-container matColumnDef="peso">
+      <mat-header-cell *matHeaderCellDef> peso </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.peso}} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Correo Electrónico -->
+    <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef> estado </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+    </ng-container>
+  
+       <!-- Columna de Correo Electrónico -->
+       <ng-container matColumnDef="vehiculo">
+        <mat-header-cell *matHeaderCellDef> vehiculo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vehiculo}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="detalle">
+        <mat-header-cell *matHeaderCellDef> QR </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <button mat-icon-button color="success" (click)="generateQRCode(element.id_envio, element.vehiculo)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+              
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>
+
+  <button mat-button (click)="cerrar()">Cerrar</button>

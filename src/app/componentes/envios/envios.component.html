@@ -1,1 +1,64 @@
-<p>envios works!</p>
+
+  <mat-table [dataSource]="tableData">
+
+        <!-- Columna de ID -->
+        <ng-container matColumnDef="id_cuenta">
+          <mat-header-cell *matHeaderCellDef> Id Cuenta </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id_cuenta}} </mat-cell>
+        </ng-container>
+
+            <!-- Columna de Nombre -->
+        <ng-container matColumnDef="Etiqueta">
+            <mat-header-cell *matHeaderCellDef> Etiqueta </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.etiqueta}} </mat-cell>
+        </ng-container>
+      
+        <!-- Columna de Nombre -->
+        <ng-container matColumnDef="Peso">
+          <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.peso}} </mat-cell>
+        </ng-container>
+
+            <!-- Columna de Nombre -->
+        <ng-container matColumnDef="Peso restante">
+          <mat-header-cell *matHeaderCellDef> Peso restante</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.peso_restante}} </mat-cell>
+        </ng-container>
+      
+        <!-- Columna de Correo Electrónico -->
+        <ng-container matColumnDef="Parcialidades">
+          <mat-header-cell *matHeaderCellDef> Parcialidades </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.parcialidades}} </mat-cell>
+        </ng-container>
+
+        <!-- Columna de Correo Electrónico -->
+        <ng-container matColumnDef="Parcialidades restantes">
+          <mat-header-cell *matHeaderCellDef> Parcialidades restantes </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.parcialidades_restantes}} </mat-cell>
+        </ng-container>
+
+
+      
+        <!-- Columna de Acciones -->
+        <ng-container matColumnDef="Enviar">
+          <mat-header-cell *matHeaderCellDef> Enviar </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <button mat-icon-button color="success" (click)="openDialog(element.id_cuenta)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Detalle">
+          <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <button mat-icon-button color="success" (click)="ver_detalle(element.id_cuenta)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
+  </mat-table>

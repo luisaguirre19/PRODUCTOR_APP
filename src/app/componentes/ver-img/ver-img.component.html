@@ -1,0 +1,7 @@
+<div *ngIf="generatedQRCode">
+    <img [src]="generatedQRCode" alt="Código QR generado">
+</div>
+<div>
+    <button mat-button (click)="imprimirImagen()">Imprimir</button>
+</div>
+

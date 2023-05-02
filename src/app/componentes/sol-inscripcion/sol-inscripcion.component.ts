@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { AuthGuard } from 'src/app/guards/auth.guard';
-import { User } from 'src/app/interfaces/user';
+import { Component} from '@angular/core';
+import { GeneralService } from 'src/app/servicios/general.service';
 import { SqlService } from 'src/app/servicios/sql.service';
 
 @Component({
@@ -15,25 +13,38 @@ import { SqlService } from 'src/app/servicios/sql.service';
 export class SolInscripcionComponent {
 
   constructor(
-    private sqlService:SqlService
-  ) { }
+    private sqlService:SqlService,
+    private gralService:GeneralService
+      ) { }
   tableData
   displayedColumns: string[] = ['id_login', 'correo', 'productor', 'nombres', 'apellidos', 'telefono','fecha_ingreso', 'actions'];
 
  
   ngOnInit() {
     this.traer_datos()
-
   }
 
 
   traer_datos(){
-     this.sqlService.getData().subscribe(resp=>{
+     this.sqlService.getData("count").subscribe(resp=>{
       this.tableData = resp
     })
   }
+
+  activar_cuenta(id:number){
+   
+    this.sqlService.putData("count","id_usuario",id,"estado","A").subscribe((resp)=>{
+      console.log("regreso " + resp)
+      this.traer_datos()
+    })
+  }
   
-    
+  desactivar_cuenta(id:number){
+    this.sqlService.putData("count","id_usuario",id,"estado","R").subscribe((resp)=>{
+      console.log("regreso " + resp)
+      this.traer_datos()
+    })
+  }
 
 }
 

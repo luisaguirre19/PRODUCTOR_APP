@@ -8,7 +8,8 @@ import { Observable, throwError, from } from 'rxjs';
 })
 export class SqlService {
  // base_path:string = 'https://coffee-benef.azurewebsites.net/api/count'
-  base_path:string = 'http://localhost:8091/api/count'
+  base_path:string = 'http://localhost:8093/api/'
+  base_path_beneficio:string = 'http://localhost:8091/api/'
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,24 +20,43 @@ export class SqlService {
 
   constructor(private http: HttpClient) { }
 
-  getData(){
+  getData(ruta:string){
      return this.http
-              .get<any[]>(this.base_path, this.httpOptions)
+              .get<any[]>(this.base_path + ruta, this.httpOptions)
               .pipe(
                 retry(2),
                 catchError(this.handleError)
               )
   }
   
-  postData(item) {
+  postData(ruta:string, item) {
      return this.http
-      .post(this.base_path,JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + ruta,JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
       
   }
+
+  putData(ruta:string, param:string, id:number, param2:string, estado:string){
+    return this.http
+    .put(this.base_path + ruta + `?${param}=${id}&${param2}=${estado}`, this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+  }
+
+  deleteData(ruta:string, param:string, id:number){
+    return this.http
+    .delete(this.base_path + ruta + `?${param}=${id}`, this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+  }
+
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -53,4 +73,23 @@ export class SqlService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
+  postData_beneficio(ruta:string, item) {
+    return this.http
+     .post(this.base_path_beneficio + ruta,JSON.stringify(item), this.httpOptions)
+     .pipe(
+       retry(2),
+       catchError(this.handleError)
+     )
+     
+ }
+
+ getData_envio(ruta:string, param:string, id:number){
+  return this.http
+  .get(this.base_path + ruta + `?${param}=${id}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError)
+  )
+}
 }

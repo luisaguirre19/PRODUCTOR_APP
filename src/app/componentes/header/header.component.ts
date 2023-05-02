@@ -20,7 +20,6 @@ export class HeaderComponent {
   // @ViewChild('productores') btnProductores: MatButton;
   log:boolean = false
 
-
   ngOnInit() {
     this.valida_login()
   }
@@ -44,5 +43,14 @@ export class HeaderComponent {
   salida(){
     this.authService.logout()
   }
+
+  async loguear_beneficio(){
+      this.log = await this.authService.login_beneficio("productor_inicial@gmail.com", "123456")
+      if(this.log){
+        alert("Bienvenido")
+      }else{
+        alert("Ingreso no autorizado")
+      }
+    }
 
 }

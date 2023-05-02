@@ -1,1 +1,59 @@
-<p>productores works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-sm-10">
+          <div class="form-wrapper">
+              <form>
+                      <mat-form-field>
+                          <input matInput placeholder="Marca" [(ngModel)]="Marca" name="name">
+                      </mat-form-field>
+
+                      <mat-form-field>
+                          <input matInput type="text" placeholder="Color:" [(ngModel)]="Color" name="Color">
+                     </mat-form-field>
+                      <mat-form-field>
+                          <input matInput type="text" placeholder="Placa:" [(ngModel)]="Placa" name="Placa">
+                     </mat-form-field>
+                  <button mat-raised-button (click)="submit()">Enviar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<mat-table [dataSource]="tableData">
+
+  <!-- Columna de ID -->
+  <ng-container matColumnDef="Marca">
+    <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+  </ng-container>
+
+  <!-- Columna de Nombre -->
+  <ng-container matColumnDef="Color">
+    <mat-header-cell *matHeaderCellDef> Color </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+  </ng-container>
+
+  <!-- Columna de Correo Electrónico -->
+  <ng-container matColumnDef="Placa">
+    <mat-header-cell *matHeaderCellDef> Placa </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+  </ng-container>
+
+  <!-- Columna de Acciones -->
+  <ng-container matColumnDef="eliminar">
+    <mat-header-cell *matHeaderCellDef> Eliminar </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <!-- <button mat-icon-button color="success" (click)="a(element.id_login)">
+        <mat-icon>done</mat-icon>
+      </button> -->
+      <button mat-icon-button color="warn" (click)="eliminar_vehiculo(element.id_transporte)" >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

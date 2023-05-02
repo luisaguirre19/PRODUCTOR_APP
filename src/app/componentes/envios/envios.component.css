@@ -1,0 +1,19 @@
+/* Estilo para el modal */
+.mat-dialog-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo para el contenido del modal */
+.modal-content {
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}

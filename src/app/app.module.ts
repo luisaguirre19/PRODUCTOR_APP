@@ -22,6 +22,11 @@ import {MatTableModule} from '@angular/material/table';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; // si estás usando ngModel
 import { AuthGuard } from './guards/auth.guard';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { EnvioDetallesComponent } from './componentes/envio-detalles/envio-detalles.component';
+import { VerImgComponent } from './componentes/ver-img/ver-img.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +37,13 @@ import { AuthGuard } from './guards/auth.guard';
     SolInscripcionComponent,
     SolCuentaComponent,
     EnviosComponent,
-    ProductoresComponent
+    ProductoresComponent,
+    EnvioDetallesComponent,
+    VerImgComponent
   ],
   imports: [
+    MatSelectModule,
+    MatDialogModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -47,7 +56,8 @@ import { AuthGuard } from './guards/auth.guard';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

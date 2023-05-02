@@ -25,14 +25,15 @@ export class AuthService {
 
   login(user:string, pass:string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-       this.sqlService.postData([{
+       this.sqlService.postData("count",[{
         "operacion":"L",
         "sub_operacion":"V",
         "correo":user,
         "pass":pass,
-        "sp":"principal_beneficio"
+        "sp":"principal_productor"
       }])
       .subscribe(data=>{
+        console.log(data[0].resp + ' ' +data)
         if(data[0].resp=="Si"){
           this.id_login = data[0].id_login
           this.correo_usuario = data[0].correo
@@ -57,5 +58,30 @@ export class AuthService {
 
   Authenticated() {
     return this.isAuthenticated;
+  }
+
+  login_beneficio(user:string, pass:string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+       this.sqlService.postData_beneficio("count",[{
+        "operacion":"L",
+        "sub_operacion":"V",
+        "correo":user,
+        "pass":pass,
+        "tipo":'P',
+        "sp":"principal_beneficio"
+      }])
+      .subscribe(data=>{
+        console.log(data[0].resp + ' ' +data)
+        if(data[0].resp=="Si"){
+          // this.id_login = data[0].id_login
+          // this.correo_usuario = data[0].correo
+          // this.isAuthenticated_forGuard = true;
+          // this.isAuthenticated.next(true);
+          resolve (true)
+        }else{
+
+        }
+      })
+    })
   }
 }

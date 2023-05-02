@@ -1,4 +1,19 @@
-<!-- <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button> -->
-hola mundo
+
+<form>
+  <mat-form-field>
+    <mat-label>Peso en libras:</mat-label>
+    <input matInput type="number" [(ngModel)]="peso" name="peso">
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>Vehículo</mat-label>
+    <mat-select name = "selectedPlaca" [(ngModel)]="selectedPlaca" >
+      <mat-option *ngFor="let transporte of placas" [value]="transporte.placa">
+        {{ transporte.placa }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <button mat-raised-button (click)="submit()">Enviar</button>
+<form>
+

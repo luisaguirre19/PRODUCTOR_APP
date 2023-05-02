@@ -1,16 +1,21 @@
+
 <mat-toolbar>
   <mat-toolbar-row>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [disabled] = "!log"  routerLink="/sol-inscripcion"  id="solIns" #solIns>
+      <button mat-menu-item [disabled] = "!log"  (click)="loguear_beneficio()"  id="solIns" #solIns>
         <mat-icon>emoji_people</mat-icon>
-        <span>Solicitudes de inscripción</span>
+        <span>Conectar con beneficio</span>
       </button>
       <button mat-menu-item routerLink="/sol-cuenta" [disabled] = "!log" #solCta>
         <mat-icon>auto_stories</mat-icon>
-        <span>Solicitudes de cuenta</span>
+        <span>Solicitar apertura de cuenta</span>
+      </button>
+      <button mat-menu-item [disabled] = "!log"  routerLink="/productores" #productores>
+        <mat-icon>handshake</mat-icon>
+        <span>Transportistas</span>
       </button>
       <button mat-menu-item [disabled] = "!log"  routerLink="/envios" #envios>
         <mat-icon>local_shipping</mat-icon>
@@ -18,7 +23,7 @@
       </button>
       <button mat-menu-item [disabled] = "!log"  routerLink="/productores" #productores>
         <mat-icon>handshake</mat-icon>
-        <span>Productores</span>
+        <span>Estados de cuenta</span>
       </button>
     </mat-menu>
     <span class="example-spacer"></span>
@@ -26,4 +31,5 @@
     <button *ngIf="!log"  mat-icon-button routerLink="/login"  #person ><mat-icon>person</mat-icon></button>
     <button *ngIf="log" mat-icon-button  #logout (click)="salida()" ><mat-icon>logout</mat-icon></button>
   </mat-toolbar-row>
+
 </mat-toolbar>
