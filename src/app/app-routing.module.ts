@@ -7,6 +7,7 @@ import { SolCuentaComponent } from './componentes/sol-cuenta/sol-cuenta.componen
 import { EnviosComponent } from './componentes/envios/envios.component';
 import { ProductoresComponent } from './componentes/productores/productores.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ConductorComponent } from './componentes/conductor/conductor.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'productores',
     component: ProductoresComponent,
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'conductor',
+    component: ConductorComponent,
     canActivate: [AuthGuard] 
   }
   

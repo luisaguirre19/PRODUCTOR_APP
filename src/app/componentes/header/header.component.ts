@@ -47,9 +47,9 @@ export class HeaderComponent {
   async loguear_beneficio(){
       this.log = await this.authService.login_beneficio("productor_inicial@gmail.com", "123456")
       if(this.log){
-        alert("Bienvenido")
+        alert("En linea con el beneficio.")
       }else{
-        alert("Ingreso no autorizado")
+        alert("Ingreso por parte del beneficio")
       }
     }
 

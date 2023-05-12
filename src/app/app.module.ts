@@ -27,6 +27,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { EnvioDetallesComponent } from './componentes/envio-detalles/envio-detalles.component';
 import { VerImgComponent } from './componentes/ver-img/ver-img.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConductorComponent } from './componentes/conductor/conductor.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { VerImgComponent } from './componentes/ver-img/ver-img.component';
     EnviosComponent,
     ProductoresComponent,
     EnvioDetallesComponent,
-    VerImgComponent
+    VerImgComponent,
+    ConductorComponent
   ],
   imports: [
     MatSelectModule,
@@ -57,7 +60,8 @@ import { VerImgComponent } from './componentes/ver-img/ver-img.component';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
