@@ -11,8 +11,8 @@ export class SqlService {
   //base_path:string = 'http://localhost:8097/api/'
   //base_path_beneficio:string = 'http://localhost:8094/api/'
 
-  base_path:string = 'coffee-dv.azurewebsites.net/api/'
-  base_path_beneficio:string = 'coffee-benef.azurewebsites.net/api/'
+  base_path:string = 'https://coffee-dv.azurewebsites.net/api/'
+  base_path_beneficio:string = 'https://coffee-benef.azurewebsites.net/api/'
 
   httpOptions = {
     headers: new HttpHeaders({
