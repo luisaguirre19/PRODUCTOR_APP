@@ -49,9 +49,15 @@ export class EnvioDetallesComponent {
       if (err) {
         console.error(err);
       }
+      this.enviar_envio_benef
       this.openDialog(url);
     });
   }
+
+  enviar_envio_benef(){
+    
+  }
+
 
   openDialog(url) {
     const dialogRef = this.dialog.open(VerImgComponent,{

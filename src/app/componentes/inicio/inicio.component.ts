@@ -31,11 +31,30 @@ export class InicioComponent {
     })
     .subscribe(data=>{
       if(data[0].resp == 'Si'){
-        alert("Envio realizado correctamente")
+        console.log["esto va " + data[0].codigo_qr]
+        this.envio_beneficio(data[0])
       }else{
         alert("Envio fallo, revisa los datos ingresados")
       }
       this.dialogRef.close();
+    })
+  }
+
+  envio_beneficio(resp){
+    this.sqlService.postData_beneficio("cuenta_envio",{
+      "id_envio":resp.id_envio,
+      "id_cuenta":resp.id_cuenta,
+      "peso":resp.peso,
+      "estado":resp.estado,
+      "vehiculo":resp.vehiculo,
+      "codigo_qr":resp.codigo_qr
+    })
+    .subscribe(data=>{
+      if(data[0].resp == 'Si'){
+        alert("Envio realizado correctamente")
+      }else{
+        alert("Envio fallo, revisa los datos ingresados")
+      }
     })
   }
 
