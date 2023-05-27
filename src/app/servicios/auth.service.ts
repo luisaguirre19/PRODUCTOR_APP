@@ -49,6 +49,9 @@ export class AuthService {
           this.router.navigate(['/sol-cuenta']);
           resolve (true)
         }else{
+          this._snackBar.open('Credenciales incorrectas, ingreso no autorizado', '', {
+            duration: 3000, // Duración en milisegundos
+          });
           this.logout()
           resolve (false)
         }

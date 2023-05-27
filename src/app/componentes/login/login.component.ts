@@ -26,10 +26,10 @@ export class LoginComponent {
 
 
   async onSubmit() {
-    this.showLoading()
+   // this.showLoading()
     this.log = await this.authService.login(this.username, this.password)
     if(this.log){
-      this.hideLoading()
+      //this.hideLoading()
       this.log2 = await this.authService.login_beneficio("productor_inicial@gmail.com", "123456")
       if(this.log2){
         this._snackBar.open('Conexion con el beneficio de café exitosa.', '', {
@@ -39,7 +39,7 @@ export class LoginComponent {
         alert("No fue posible establecer conexión con el beneficio")
       }
     }else{
-      this.hideLoading()
+     //this.hideLoading()
       alert("Ingreso no autorizado")
     }
   }
@@ -55,6 +55,10 @@ export class LoginComponent {
     if (this.dialogRef) {
       this.dialogRef.close();
     }
+  }
+
+  inscribir(){
+
   }
 
 

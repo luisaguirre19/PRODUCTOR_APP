@@ -5,10 +5,6 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [disabled] = "!log"  (click)="loguear_beneficio()"  id="solIns" #solIns>
-        <mat-icon>emoji_people</mat-icon>
-        <span>Conectar con beneficio</span>
-      </button>
       <button mat-menu-item routerLink="/sol-cuenta" [disabled] = "!log" #solCta>
         <mat-icon>auto_stories</mat-icon>
         <span>Solicitar apertura de cuenta</span>

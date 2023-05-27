@@ -24,8 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'sol-inscripcion',
-    component: SolInscripcionComponent,
-    canActivate: [AuthGuard] 
+    component: SolInscripcionComponent
   },
   {
     path: 'sol-cuenta',
