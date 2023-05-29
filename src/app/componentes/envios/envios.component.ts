@@ -4,6 +4,7 @@ import { SqlService } from 'src/app/servicios/sql.service';
 import { InicioComponent } from "../inicio/inicio.component";
 import { EnvioDetallesComponent } from "../envio-detalles/envio-detalles.component";
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/servicios/auth.service';
 @Component({
   selector: 'app-envios',
   templateUrl: './envios.component.html',
@@ -19,7 +20,8 @@ export class EnviosComponent {
   constructor(
     private sqlService:SqlService,
     private gralService:GeneralService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService:AuthService
       ) { }
 
 
@@ -29,7 +31,7 @@ export class EnviosComponent {
 
 
   traer_datos(){
-     this.sqlService.getData("cuenta_envio").subscribe(resp=>{
+     this.sqlService.postData("get_cuenta_envio", {'correo':this.authService.correo_usuario}).subscribe(resp=>{
       this.tableData = resp
     })
   }

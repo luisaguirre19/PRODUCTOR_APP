@@ -14,6 +14,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Conductor</mat-label>
+    <mat-select name = "selectedPlaca" [(ngModel)]="selectedConductor" >
+      <mat-option *ngFor="let conductores of conductor" [value]="conductores.id_conductor">
+        {{ conductores.nombre + ' ' + conductores.apellido}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
     <button mat-raised-button (click)="submit()">Enviar</button>
 <form>
 

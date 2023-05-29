@@ -19,4 +19,20 @@ table {
   button.mat-icon-button {
     margin-right: 4px;
   }
+
+  input[type="file"]::-webkit-file-upload-button {
+    /* Estilos personalizados para el botón */
+    background-color: #954caf;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  input[type="file"]::-webkit-file-upload-button::before {
+    /* Texto personalizado para el botón */
+    content: 'Foto del vehiculo';
+  }
+    
   

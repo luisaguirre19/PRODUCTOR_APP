@@ -29,6 +29,10 @@ import { EnvioDetallesComponent } from './componentes/envio-detalles/envio-detal
 import { VerImgComponent } from './componentes/ver-img/ver-img.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConductorComponent } from './componentes/conductor/conductor.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from  '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment.prod';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import { ConductorComponent } from './componentes/conductor/conductor.component'
   imports: [
     MatSelectModule,
     MatDialogModule,
+    MatTabsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -61,7 +66,9 @@ import { ConductorComponent } from './componentes/conductor/conductor.component'
     MatInputModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

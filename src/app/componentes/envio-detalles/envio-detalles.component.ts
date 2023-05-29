@@ -12,7 +12,7 @@ import { VerImgComponent } from "../ver-img/ver-img.component";
 })
 export class EnvioDetallesComponent {
   envios
-  displayedColumns: string[] = ['id_envio', 'peso', 'estado', 'vehiculo', 'detalle'];
+  displayedColumns: string[] = ['id_envio', 'peso', 'estado', 'vehiculo', 'conductor', 'detalle'];
   id
 
   constructor(

@@ -24,6 +24,11 @@
         <mat-cell *matCellDef="let element"> {{element.vehiculo}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="conductor">
+        <mat-header-cell *matHeaderCellDef> conductor </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.conductor}} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="detalle">
         <mat-header-cell *matHeaderCellDef> QR </mat-header-cell>
         <mat-cell *matCellDef="let element"> 

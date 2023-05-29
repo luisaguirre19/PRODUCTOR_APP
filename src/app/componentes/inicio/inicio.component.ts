@@ -13,6 +13,9 @@ export class InicioComponent {
   peso
   id
   placas
+
+  conductor
+  selectedConductor
   constructor(
     private sqlService:SqlService,
     private authService:AuthService,
@@ -26,6 +29,7 @@ export class InicioComponent {
     this.sqlService.postData("cuenta_envio",{
       "correo":this.authService.correo_usuario,
       "placa":this.selectedPlaca,
+      "conductor":this.selectedConductor,
       "peso":this.peso,
       "id_generico":this.id
     })
@@ -33,6 +37,8 @@ export class InicioComponent {
       if(data[0].resp == 'Si'){
         console.log["esto va " + data[0].codigo_qr]
         this.envio_beneficio(data[0])
+      }else if (data[0].resp == 'No conductor'){
+        alert("Envio fallo, tu conductor no esta disponible")
       }else{
         alert("Envio fallo, revisa los datos ingresados")
       }
@@ -59,12 +65,19 @@ export class InicioComponent {
   }
 
   ngOnInit() {
-    this.traer_datos()
+    this.traer_datos_transporte()
 
   }
-  traer_datos(){
-     this.sqlService.getData("transporte").subscribe(resp=>{
+  traer_datos_transporte(){
+     this.sqlService.postData("get_transporte", {"correo":this.authService.correo_usuario}).subscribe(resp=>{
       this.placas = resp
+      this.traer_datos_conductor()
     })
   }
+
+  traer_datos_conductor(){
+    this.sqlService.postData("get_conductor", {"correo":this.authService.correo_usuario}).subscribe(resp=>{
+      this.conductor = resp
+    })
+ }
 }
