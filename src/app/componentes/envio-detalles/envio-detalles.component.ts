@@ -44,7 +44,6 @@ export class EnvioDetallesComponent {
   }
 
   generateQRCode(id,placa) {
-    alert(this.id+placa+id)
     QRCode.toDataURL(this.id+placa+id, { errorCorrectionLevel: 'H' }, (err, url) => {
       if (err) {
         console.error(err);
