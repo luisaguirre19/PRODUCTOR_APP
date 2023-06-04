@@ -53,7 +53,6 @@ export class ProductoresComponent {
   }
 
   submit(){
-    alert("enviaremos")
       this.sqlService.postData("transporte",{
        "correo":this.authService.correo_usuario,
        "marca":this.Marca,
@@ -121,7 +120,6 @@ export class ProductoresComponent {
         success =>{
           if(success){
             this.img =  this.obtenerURL(path)
-            alert("img " + this.img)
             this.submit()
           }
         }

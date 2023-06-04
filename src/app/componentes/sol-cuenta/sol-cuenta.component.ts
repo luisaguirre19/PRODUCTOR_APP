@@ -56,14 +56,12 @@ export class SolCuentaComponent {
   }
 
   traer_datos(){
-    alert(this.authService.correo_usuario)
     this.sqlService.postData("cuenta_pendiente",{"correo":this.authService.correo_usuario}).subscribe(resp=>{
      this.tableData = resp
    })
  }
 
  onFileSelected(event: Event) {
-  alert("ca")
   const file = (event.target as HTMLInputElement).files[0];
   this.uploadFile(file);
   }

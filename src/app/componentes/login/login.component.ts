@@ -30,14 +30,14 @@ export class LoginComponent {
     this.log = await this.authService.login(this.username, this.password)
     if(this.log){
       //this.hideLoading()
-      this.log2 = await this.authService.login_beneficio("productor_inicial@gmail.com", "123456")
-      if(this.log2){
-        this._snackBar.open('Conexion con el beneficio de café exitosa.', '', {
+      // this.log2 = await this.authService.login_beneficio("productor_inicial@gmail.com", "123456")
+      // if(this.log2){
+        this._snackBar.open('Bienvenido.', '', {
           duration: 3000, // Duración en milisegundos
         });
-      }else{
-        alert("No fue posible establecer conexión con el beneficio")
-      }
+      // }else{
+      //   alert("No fue posible establecer conexión con el beneficio")
+      // }
     }else{
      //this.hideLoading()
       alert("Ingreso no autorizado")
