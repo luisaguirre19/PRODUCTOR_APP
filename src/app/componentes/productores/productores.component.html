@@ -1,60 +1,54 @@
-<div class="container">
-  <div class="row justify-content-center">
-      <div class="col-sm-10">
-          <div class="form-wrapper">
-              <form>
-                      <mat-form-field>
-                          <input matInput placeholder="Marca" [(ngModel)]="Marca" name="name">
-                      </mat-form-field>
-
-                      <mat-form-field>
-                          <input matInput type="text" placeholder="Color:" [(ngModel)]="Color" name="Color">
-                     </mat-form-field>
-                      <mat-form-field>
-                          <input matInput type="text" placeholder="Placa:" [(ngModel)]="Placa" name="Placa">
-                     </mat-form-field>
-
-                     <input type="file" accept=".jpg, .jpeg .png" (change) ="onUploadImgBrowser($event)">
-
-                  <button mat-raised-button (click)="enviar_firebase()">Enviar</button>
-              </form>
-          </div>
-      </div>
-  </div>
-</div>
-
 <mat-table [dataSource]="tableData">
-
   <!-- Columna de ID -->
-  <ng-container matColumnDef="Marca">
-    <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+  <ng-container matColumnDef="id_estado_cuenta">
+    <mat-header-cell *matHeaderCellDef> id_estado_cuenta </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.id_estado_cuenta}} </mat-cell>
+  </ng-container>
+
+      <!-- Columna de Nombre -->
+  <ng-container matColumnDef="id_cuenta">
+      <mat-header-cell *matHeaderCellDef> id_cuenta </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id_cuenta}} </mat-cell>
   </ng-container>
 
   <!-- Columna de Nombre -->
-  <ng-container matColumnDef="Color">
-    <mat-header-cell *matHeaderCellDef> Color </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+  <ng-container matColumnDef="peso_esperado">
+    <mat-header-cell *matHeaderCellDef> peso_esperado </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.peso_esperado}} </mat-cell>
   </ng-container>
 
   <!-- Columna de Correo Electrónico -->
-  <ng-container matColumnDef="Placa">
-    <mat-header-cell *matHeaderCellDef> Placa </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+  <ng-container matColumnDef="peso_total">
+    <mat-header-cell *matHeaderCellDef> peso_total </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.peso_total}} </mat-cell>
   </ng-container>
 
-  <!-- Columna de Acciones -->
-  <ng-container matColumnDef="eliminar">
-    <mat-header-cell *matHeaderCellDef> Eliminar </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <!-- <button mat-icon-button color="success" (click)="a(element.id_login)">
-        <mat-icon>done</mat-icon>
-      </button> -->
-      <button mat-icon-button color="warn" (click)="eliminar_vehiculo(element.id_transporte)" >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-cell>
+  <ng-container matColumnDef="diferencia">
+      <mat-header-cell *matHeaderCellDef> diferencia </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.diferencia}} </mat-cell>
   </ng-container>
+
+  <ng-container matColumnDef="estado">
+    <mat-header-cell *matHeaderCellDef> estado </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <mat-header-cell *matHeaderCellDef> fecha </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="imprimir">
+    <mat-header-cell *matHeaderCellDef> Imprimir </mat-header-cell>
+    <mat-cell *matCellDef="let element"> 
+      <button mat-icon-button color="success" (click)="print(element.id_cuenta ,element.peso_esperado ,element.peso_total ,element.diferencia , element.estado, element.fecha)">
+        <mat-icon>print</mat-icon>
+      </button>
+      <!-- <button mat-icon-button color="warn" (click)="eliminar_vehiculo(element.id_transporte)" >
+        <mat-icon>delete</mat-icon>
+      </button>-->
+      </mat-cell> 
+  </ng-container> 
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

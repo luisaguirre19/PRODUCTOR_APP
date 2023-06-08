@@ -5,158 +5,109 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { formatDate } from '@angular/common';
 import { finalize, map } from 'rxjs/operators';
 import { AngularFireStorage } from "@angular/fire/compat/storage";
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 @Component({
   selector: 'app-productores',
   templateUrl: './productores.component.html',
   styleUrls: ['./productores.component.css']
 })
 export class ProductoresComponent {
+  name: string;
+  age: number;
+  peso:number
+  parcialidad:number
+  etiqueta
+
+  tableData
+  displayedColumns: string[] = ['id_estado_cuenta', 'id_cuenta', 'peso_esperado', 'peso_total', 'diferencia', 'estado', 'fecha', 'imprimir'];
+  						
   constructor(
     private sqlService:SqlService,
-    private authService:AuthService,
-    private dom: DomSanitizer,
-    private storage: AngularFireStorage
-  ) { 
-    //this.blobServiceClient = new BlobServiceClient('DefaultEndpointsProtocol=https;AccountName=imgis;AccountKey=/bQ7eZW0nT4k3KxAmoj1f3nN8/qFnx6eiNa8NuzOnIBVGVaGW6HaBLAL8iVfegefaM0nYDhkNRmw+AStZmrrrw==;EndpointSuffix=core.windows.net');
-  }
-  tableData
-  displayedColumns: string[] = ['Marca', 'Color', 'Placa', 'eliminar'];
-  Marca
-  Color
-  Placa
- // private blobServiceClient: BlobServiceClient;
- imageData
- urlimage
- url_image:string
- img //para cargar imagenes obtener la url
- path //para devolver el path de la imagen
+    private authService:AuthService
+  ) { }
+
   ngOnInit() {
     this.traer_datos()
-
   }
 
 
   traer_datos(){
-    this.Marca = ""
-    this.Color = ""
-    this.Placa = ""
-     this.sqlService.postData("get_transporte", {"correo":this.authService.correo_usuario}).subscribe(resp=>{
-      this.tableData = resp
-    })
-  }
+    this.sqlService.postData("estado_cuenta",{
+      "correo":this.authService.correo_usuario
+   })
+   .subscribe(data=>{
+      this.tableData = data
+   })
 
-  desactivar_cuenta(id:number){
-    this.sqlService.putData("count","id_usuario",id,"estado","R").subscribe((resp)=>{
-      this.traer_datos()
-    })
-  }
-
-  submit(){
-      this.sqlService.postData("transporte",{
-       "correo":this.authService.correo_usuario,
-       "marca":this.Marca,
-       "color":this.Color,
-       "placa":this.Placa,
-       "url_img":this.url_image
-     })
-     .subscribe(data=>{
-      if(data[0].resp ='Si'){
-        this.traer_datos()
-      }else{
-        alert("No se pudo ingresar el vehiculo, verifica los datos.")
-      }
-     })
-  }
-
-  eliminar_vehiculo(id){
-      this.sqlService.deleteData("transporte", "id_transporte",id)
-      .subscribe(data=>{
-        this.traer_datos()
-      })
-  }
-
-
-
-
-  onUploadImgBrowser(e){
-    console.log(2)
-    this.imageData = this.cargarImageDataBrowser(e)
-    this.urlimage =  this.obtieneUrlImageSanitizada( this.imageData)
-   
-  }
-
-  cargarImageDataBrowser(e){
-    if(e.target.files.length > 1){
-      for (let i = 0; i < e.target.files.length; i++) {
-        if(e.target.files[i].size > 2000000){
-        //  this.presentAlert('Imagen muy pesada',"La imagen es mayor a 2 MB","Le recomendamos descargar de su pagina de facebook la imagen o utilizar una imagen que se haya enviado por wathsapp para disminuir el peso.")
-          return
-        }
-      }
-      return  e.target.files;
-    }else{
-      if(e.target.files[0].size > 2000000){
-       // this.presentAlert('Imagen muy pesada',"La imagen es mayor a 2 MB","Le recomendamos descargar de su pagina de facebook la imagen o utilizar una imagen que se haya enviado por wathsapp para disminuir el peso.")
-        return
-      }
-      return  e.target.files[0];
-    }
-  }
-
-  obtieneUrlImageSanitizada(file){
-    var TmpPath = URL.createObjectURL(file);
-    return this.dom.bypassSecurityTrustUrl(TmpPath);  
-  }
-
-
-  async enviar_firebase(){
-    let data:any = []
-
-    const path = this.authService.correo_usuario + '/'+ "  " + formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530') + '.jpg'
-        
-   
-      await this.cargarIMG(path, this.imageData, "").then(
-        success =>{
-          if(success){
-            this.img =  this.obtenerURL(path)
-            this.submit()
-          }
-        }
-      ).catch(err => { 
-      });
-  }
-
-
-  cargarIMG(fileName:string, file:any, base?:any){
-    const fileRef = this.storage.ref(fileName);
-    if(!base){
-      return new Promise<any>((resolve, reject) => {
-        const task =  this.storage.upload(fileName, file);
-        task.snapshotChanges().pipe(
-                                      finalize(() => fileRef.getDownloadURL().subscribe(
-                                                        res => resolve( this.url_image = res),
-                                                        err => reject(err)
-                                                      )
-                                      )
-                                    ).subscribe();
-      })
-    }else{
-      return new Promise<any>((resolve, reject) => {
-        const task = fileRef.putString(base, 'data_url');
-        task.snapshotChanges().pipe(
-                finalize(() => fileRef.getDownloadURL().subscribe(
-                    res => resolve( this.url_image = res),
-                    err => reject(err)
-                ))).subscribe();
-        })
-    }
-
-  }
-
-  obtenerURL(fileName){
-    return this.url_image
  }
 
+ print(id_cuenta,peso_esperado,peso_total,diferencia, estado, fecha) {
 
+  var docDefinition = {
+   // watermark: { text: 'PESO CABAL, S.A.', color: 'blue', opacity: 0.3, bold: true, italics: false },
+    content: [
+      { text: 'Beneficio cafetito S.A.', style: 'subheader' },
+      'A continuación te adjuntamos los datos de cuenta:',
+      {
+        style: 'tableExample',
+        color: '#444',
+        table: {
+          widths: [200, 'auto', 'auto'],
+          headerRows: 2,
+          // keepWithHeaderRows: 1,
+          body: [
+            [{ text: 'Identificador de la cuenta', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: id_cuenta.toString(), style: 'tableHeader', alignment: 'Right' }],
+            [{ text: 'Peso esperado:', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: peso_esperado.toString(), style: 'tableHeader', alignment: 'Right' }],
+            [{ text: 'Peso total', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: peso_total.toString(), style: 'tableHeader', alignment: 'Right' }],
+            [{ text: 'Diferencia', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: diferencia.toString(), style: 'tableHeader', alignment: 'Right' }],
+            [{ text: 'Estado', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: estado.toString(), style: 'tableHeader', alignment: 'Right' }],
+            [{ text: 'Fecha', style: 'tableHeader', colSpan: 2, alignment: 'Left' }, {}, { text: fecha.toString(), style: 'tableHeader', alignment: 'Right' }]
+          ]
+        }
+      }
+    ],
+    styles: {
+      header: {
+        fontSize: 18,
+        bold: true,
+        margin: [0, 0, 0, 10]
+      },
+      subheader: {
+        fontSize: 16,
+        bold: true,
+        margin: [0, 10, 0, 5]
+      },
+      tableExample: {
+        margin: [0, 5, 0, 15]
+      },
+      tableOpacityExample: {
+        margin: [0, 5, 0, 15],
+        fillColor: 'blue',
+        fillOpacity: 0.3
+      },
+      tableHeader: {
+        bold: true,
+        fontSize: 13,
+        color: 'black'
+      }
+    },
+    defaultStyle: {
+      // alignment: 'justify'
+    },
+    patterns: {
+      stripe45d: {
+        boundingBox: [1, 1, 4, 4],
+        xStep: 3,
+        yStep: 3,
+        pattern: '1 w 0 1 m 4 5 l s 2 0 m 5 3 l s'
+      }
+    }
+  };
+  
+  pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+  const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+  pdfDocGenerator.download('documento.pdf');  // Nombre del archivo de salida
+}
 }
