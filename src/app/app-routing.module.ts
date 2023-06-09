@@ -8,6 +8,7 @@ import { EnviosComponent } from './componentes/envios/envios.component';
 import { ProductoresComponent } from './componentes/productores/productores.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ConductorComponent } from './componentes/conductor/conductor.component';
+import { VehiculoComponent } from './componentes/vehiculo/vehiculo.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: 'conductor',
     component: ConductorComponent,
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'vehiculo',
+    component: VehiculoComponent,
     canActivate: [AuthGuard] 
   }
   

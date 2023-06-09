@@ -33,6 +33,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from  '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment.prod';
 import { MatTabsModule } from '@angular/material/tabs';
+import { VehiculoComponent } from './componentes/vehiculo/vehiculo.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ProductoresComponent,
     EnvioDetallesComponent,
     VerImgComponent,
-    ConductorComponent
+    ConductorComponent,
+    VehiculoComponent
   ],
   imports: [
     MatSelectModule,
